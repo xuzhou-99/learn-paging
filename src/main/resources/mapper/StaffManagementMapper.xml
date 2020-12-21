@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.StaffManagementMapper">
+    <resultMap id="baseResultMap" type="com.example.demo.model.Staff">
+        <result column="ID" jdbcType="SMALLINT" property="id" />
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="AGE" jdbcType="SMALLINT" property="age"/>
+        <result column="SEX" jdbcType="SMALLINT" property="sex"/>
+        <result column="CORP" jdbcType="VARCHAR" property="corp"/>
+        <result column="DEPT" jdbcType="VARCHAR" property="dept"/>
+        <result column="POSITION" jdbcType="VARCHAR" property="position"/>
+    </resultMap>
+
+    <select id="queryStaffByConditions" resultMap="baseResultMap" >
+        select id, name, age, sex, corp, dept, position from db_wam_sys.t_staffs limit #{parameter.offset}, #{parameter.pageSize}
+    </select>
+
+    <select id="countStaff" resultType="INT">
+        select count(1)
+        from db_wam_sys.t_staffs
+    </select>
+
+</mapper>
